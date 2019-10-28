@@ -11,13 +11,13 @@ enum Direction {
     @Override
     public String toString() {
         if (this == Direction.LEFT) {
-            return "left";
-        } else if (this == Direction.RIGHT) {
             return "right";
+        } else if (this == Direction.RIGHT) {
+            return "left";
         } else if (this == Direction.UP) {
-            return "up";
-        } else {
             return "down";
+        } else {
+            return "up";
         }
     }
 }
@@ -56,17 +56,6 @@ public class Main {
         }
 
         return map;
-    }
-
-    private static void printInput(int numbersCount, int zeroIndex, int[][] arr, int tableWidth) {
-        System.out.println(numbersCount);
-        System.out.println(zeroIndex);
-        for (int i = 0; i < tableWidth; ++i) {
-            for (int j = 0; j < tableWidth; j++) {
-                System.out.print(arr[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 
     private int heuristic() {
@@ -211,18 +200,13 @@ public class Main {
 
         Map<Integer, Pair<Integer, Integer>> goalMap = initializeGoalState(tableWidth, goalZeroIndex);
 
-
         Main table = new Main(arr, goalMap, startRow, startCol);
 
-        printInput(numbersCount, goalZeroIndex, arr, tableWidth);
-        System.out.println(table.goalMap);
-
-//        System.out.println(table.heuristic(arr));
         List<Direction> path = table.idaStarSearch();
+        Collections.reverse(path);
         System.out.println(path.size());
         for (Direction dir : path) {
             System.out.println(dir);
         }
-//        System.out.println(Direction.DOWN.toString());
     }
 }
